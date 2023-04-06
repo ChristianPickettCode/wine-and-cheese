@@ -7,6 +7,7 @@ const Pie = (props: Props) => {
   return (
     <div>
       <PieChart
+        style={{ marginBottom: "1em" }}
         data={[
           { title: "cheese", value: 1, color: "#AFF8D8" },
           { title: "wine", value: 2, color: "#A79AFF" },

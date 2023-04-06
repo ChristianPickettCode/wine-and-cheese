@@ -21,7 +21,7 @@ function Decide({}: Props) {
   return (
     <div>
       <Pie />
-      <VStack style={{ marginTop: "1.2em" }}>
+      <VStack>
         <Flex width="50%">
           <h1 style={{ fontSize: "2em" }}>🍷</h1>
           <Spacer />
@@ -37,7 +37,7 @@ function Decide({}: Props) {
 
         <Spacer />
         <Flex width="100%">
-          <h3 style={{ paddingTop: "7px" }}>I have another idea</h3>
+          <h3 style={{ paddingTop: "6px" }}>I have another idea</h3>
           <Spacer />
           <Input width="50%" />
         </Flex>

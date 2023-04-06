@@ -4,6 +4,7 @@ import styles from "../styles/Home.module.css";
 import Start from "./components/start";
 import Ideal from "./components/ideal";
 import Decide from "./components/decide";
+import Guests from "./components/guests";
 
 export default function Home() {
   return (
@@ -18,9 +19,10 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        {/* <Start /> */}
+        <Start />
         {/* <Ideal /> */}
-        <Decide />
+        {/* <Decide /> */}
+        {/* <Guests /> */}
       </main>
     </div>
   );
