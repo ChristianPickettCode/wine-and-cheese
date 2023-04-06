@@ -1,22 +1,20 @@
-import { List, ListIcon, ListItem, Stack } from "@chakra-ui/react";
-import React, { useState } from "react";
+import { List, ListItem, Stack } from "@chakra-ui/react";
+import React from "react";
 import Pie from "./pie";
+import { useStore } from "../store/store";
+import { nanoid } from "nanoid";
 
 type Props = {};
 
 const Guests = (props: Props) => {
-  const [guests, setGuests] = useState([
-    { name: "jane", wine: true, cheese: false },
-    { name: "sam", wine: true, cheese: true },
-    { name: "crytal", wine: true, cheese: false },
-    { name: "mark", wine: false, cheese: true },
-  ]);
+  const guests = useStore((state) => state.guests);
   return (
     <Stack>
       <Pie />
+      <h1 style={{ textAlign: "center", fontSize: "2em" }}>See you soon 😇</h1>
       <List spacing={3} style={{ textAlign: "center" }}>
         {guests.map((guest, _) => (
-          <ListItem>
+          <ListItem key={nanoid()}>
             {guest.name} - {guest.wine ? "🍷" : ""} {guest.cheese ? "🧀" : ""}
           </ListItem>
         ))}

@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-type dbGuest = {
+export type dbGuest = {
   name: string;
   wine: boolean;
   cheese: boolean;
@@ -31,9 +31,7 @@ type State = {
 };
 
 type Action = {
-  loadGuests: (dbGuests: dbGuest[]) => Guest[];
-  // addGuest: (g: Guest) => Guest[]
-  // saveGuest
+  loadGuests: (dbGuests: dbGuest[]) => void;
   setName: (name: string) => void;
   updateGuest: (wine: boolean, cheese: boolean, suggestion: string) => void;
   acknowledged: () => void;
@@ -70,25 +68,47 @@ export const useStore = create<State & Action>()(
             numOfCheese: numOfCheese,
           },
           guestSaved: true,
+          guests: [
+            ...state.guests,
+            {
+              name: state.thisGuest?.name,
+              wine: wine,
+              cheese: cheese,
+              suggestion: suggestion,
+            },
+          ],
         }));
-
-        // TODO : SaveToDB
       },
       setName: (name: string) =>
         set((state) => ({
           thisGuest: { name: name, wine: false, cheese: false, suggestion: "" },
         })),
       loadGuests: (dbGuest: dbGuest[]) => {
-        return dbGuest.map((v, _) => ({
-          name: v.name,
-          wine: v.wine,
-          cheese: v.cheese,
-          suggestion: v.suggestion,
+        let cheeseCount = 0;
+        let wineCount = 0;
+
+        dbGuest.forEach((el) => {
+          if (el.cheese) {
+            cheeseCount += 1;
+          }
+          if (el.wine) {
+            wineCount += 1;
+          }
+        });
+
+        set((state) => ({
+          guests: dbGuest.map((v, _) => ({
+            name: v.name,
+            wine: v.wine,
+            cheese: v.cheese,
+            suggestion: v.suggestion,
+          })),
+          pie: { numOfCheese: cheeseCount, numOfWine: wineCount },
         }));
       },
     }),
     {
-      name: "guest-storage", // name of the item in the storage (must be unique)
+      name: "guest-storage",
     }
   )
 );

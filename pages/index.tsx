@@ -15,25 +15,27 @@ export default function Home() {
   const thisGuest = useStore((state) => state.thisGuest);
   const isInterested = useStore((state) => state.isInterested);
   const guestSaved = useStore((state) => state.guestSaved);
+  const loadGuests = useStore((state) => state.loadGuests);
   const [guest, setGuest] = useState<Guest | undefined>();
   const [isLoading, setIsLoading] = useState(true);
+
   const getData = async () => {
     const { data, error } = await supabase.from("guests").select();
-    console.log(data, error);
+    if (data != null) {
+      let lG = data.map((v, _) => ({
+        name: v.name,
+        cheese: v.cheese,
+        wine: v.wine,
+        created_at: v.created_at,
+        id: v.id,
+        suggestion: v.suggestion,
+      }));
+      loadGuests(lG);
+    }
   };
 
-  // const insertData = async () => {
-  //   const { data, error } = await supabase.from("guests").insert([
-  //     {
-  //       name: "jane",
-  //       cheese: false,
-  //       wine: true,
-  //     },
-  //   ]);
-  // };
   useEffect(() => {
     getData();
-    console.log(thisGuest);
 
     return () => {};
   }, [supabase]);
@@ -73,7 +75,9 @@ export default function Home() {
         ) : guest ? (
           isInterested ? (
             guestSaved ? (
-              "See you soon 😇"
+              <div>
+                <Guests />
+              </div>
             ) : (
               <Decide />
             )
@@ -83,10 +87,6 @@ export default function Home() {
         ) : (
           <Start />
         )}
-
-        {/* <Ideal /> */}
-        {/* <Decide /> */}
-        {/* <Guests /> */}
       </main>
     </div>
   );

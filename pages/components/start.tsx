@@ -7,6 +7,12 @@ type Props = {};
 const Start = (props: Props) => {
   const saveName = useStore((state) => state.setName);
   const [name, setName] = useState("");
+
+  const localSaveName = () => {
+    if (name != "") {
+      saveName(name);
+    }
+  };
   return (
     <div>
       <h1 style={{ fontSize: "8em" }}>Enter your name</h1>
@@ -17,7 +23,7 @@ const Start = (props: Props) => {
           onChange={(e) => setName(e.target.value)}
         />
         <Spacer />
-        <Button size="lg" colorScheme="purple" onClick={() => saveName(name)}>
+        <Button size="lg" colorScheme="purple" onClick={localSaveName}>
           Enter
         </Button>
       </Stack>

@@ -9,6 +9,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { useStore } from "../store/store";
+import { supabase } from "../api/api";
 
 type Props = {};
 
@@ -17,6 +18,31 @@ function Decide({}: Props) {
   const [cheese, setCheese] = useState(false);
   const [suggestion, setSuggestion] = useState("");
   const updateGuest = useStore((state) => state.updateGuest);
+  const thisGuest = useStore((state) => state.thisGuest);
+
+  const insertData = async () => {
+    const { data, error } = await supabase.from("guests").insert([
+      {
+        name: thisGuest?.name,
+        cheese: cheese,
+        wine: wine,
+        suggestion: suggestion,
+      },
+    ]);
+
+    if (error != null) {
+      console.error("ERROR inserting guest to DB", error);
+      return null;
+    }
+    return data;
+  };
+
+  const SaveToDB = () => {
+    let data = insertData();
+    if (data != null) {
+      updateGuest(wine, cheese, suggestion);
+    }
+  };
   return (
     <div>
       <Pie />
@@ -52,11 +78,7 @@ function Decide({}: Props) {
         </Flex>
 
         <Spacer />
-        <Button
-          colorScheme="purple"
-          width="100%"
-          onClick={() => updateGuest(wine, cheese, suggestion)}
-        >
+        <Button colorScheme="purple" width="100%" onClick={SaveToDB}>
           RSVP
         </Button>
       </VStack>
