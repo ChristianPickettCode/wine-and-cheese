@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Input, Spacer, Stack } from "@chakra-ui/react";
-import { useStore } from "../store/store";
+import { useStore } from "../../lib/store/store";
 
 type Props = {};
 
@@ -15,7 +15,7 @@ const Start = (props: Props) => {
   };
   return (
     <div>
-      <h1 style={{ fontSize: "8em" }}>Enter your name</h1>
+      <h1 style={{ fontSize: "8em" }}>Enter your name(s)</h1>
       <Stack>
         <Input
           size="lg"

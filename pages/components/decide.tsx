@@ -8,7 +8,7 @@ import {
   Spacer,
   VStack,
 } from "@chakra-ui/react";
-import { useStore } from "../store/store";
+import { useStore } from "../../lib/store/store";
 import { supabase } from "../api/api";
 
 type Props = {};
@@ -47,6 +47,7 @@ function Decide({}: Props) {
     <div>
       <Pie />
       <VStack>
+        <p style={{ fontSize: "2em" }}>2🍷 : 1🧀</p>
         <Flex width="50%">
           <h1 style={{ fontSize: "2em" }}>🍷</h1>
           <Spacer />

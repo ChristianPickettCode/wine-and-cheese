@@ -1,6 +1,6 @@
 import React from "react";
 import { PieChart } from "react-minimal-pie-chart";
-import { useStore } from "../store/store";
+import { useStore } from "../../lib/store/store";
 
 type Props = {};
 
@@ -11,8 +11,8 @@ const Pie = (props: Props) => {
       <PieChart
         style={{ marginBottom: "1em" }}
         data={[
-          { title: "cheese", value: pie.numOfCheese, color: "#AFF8D8" },
-          { title: "wine", value: pie.numOfWine, color: "#A79AFF" },
+          { title: "cheese", value: pie.numOfCheese, color: "#FDFD96" },
+          { title: "wine", value: pie.numOfWine, color: "#FF6961" },
         ]}
       />
     </div>

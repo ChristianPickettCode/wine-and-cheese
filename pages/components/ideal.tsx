@@ -1,7 +1,7 @@
 import React from "react";
 import Pie from "./pie";
 import { Button, Spacer, Stack } from "@chakra-ui/react";
-import { useStore } from "../store/store";
+import { useStore } from "../../lib/store/store";
 
 type Props = {};
 
@@ -12,7 +12,9 @@ const Ideal = (props: Props) => {
       <Stack align="center">
         <Pie />
         <Spacer />
-        <h1 style={{ fontSize: "2em" }}>Ideally we would like a 2:1 ratio</h1>
+        <h1 style={{ fontSize: "2em" }}>
+          Ideally we would like a 2🍷 : 1🧀 ratio
+        </h1>
         <Spacer />
         <Button colorScheme="purple" onClick={acknowledged}>
           What can you bring?

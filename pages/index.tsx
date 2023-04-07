@@ -4,7 +4,7 @@ import Start from "./components/start";
 import Ideal from "./components/ideal";
 import Decide from "./components/decide";
 import Guests from "./components/guests";
-import { useStore, Guest } from "./store/store";
+import { useStore, Guest } from "../lib/store/store";
 
 import { useEffect, useState } from "react";
 
