@@ -15,7 +15,7 @@ const Start = (props: Props) => {
   };
   return (
     <div>
-      <h1 style={{ fontSize: "8em" }}>Enter your name(s)</h1>
+      <h1 style={{ fontSize: "6em" }}>Enter your name(s)</h1>
       <Stack>
         <Input
           size="lg"
