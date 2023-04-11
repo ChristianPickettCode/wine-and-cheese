@@ -20,6 +20,7 @@ export type Guest = {
 type Pie = {
   numOfWine: number;
   numOfCheese: number;
+  num0fSuggestion: number;
 };
 
 type State = {
@@ -45,15 +46,19 @@ export const useStore = create<State & Action>()(
       guestSaved: false,
       acknowledged: () => set((state) => ({ isInterested: true })),
       guests: [],
-      pie: { numOfWine: 0, numOfCheese: 0 },
+      pie: { numOfWine: 0, numOfCheese: 0, num0fSuggestion: 0 },
       updateGuest: (wine: boolean, cheese: boolean, suggestion: string) => {
         let numOfWine = get().pie.numOfWine;
         let numOfCheese = get().pie.numOfCheese;
+        let num0fSuggestion = get().pie.num0fSuggestion;
         if (wine) {
           numOfWine += 1;
         }
         if (cheese) {
           numOfCheese += 1;
+        }
+        if (suggestion) {
+          num0fSuggestion += 1;
         }
 
         set((state) => ({
@@ -66,6 +71,7 @@ export const useStore = create<State & Action>()(
           pie: {
             numOfWine: numOfWine,
             numOfCheese: numOfCheese,
+            num0fSuggestion: num0fSuggestion,
           },
           guestSaved: true,
           guests: [
@@ -86,6 +92,7 @@ export const useStore = create<State & Action>()(
       loadGuests: (dbGuest: dbGuest[]) => {
         let cheeseCount = 0;
         let wineCount = 0;
+        let suggestionCount = 0;
 
         dbGuest.forEach((el) => {
           if (el.cheese) {
@@ -93,6 +100,9 @@ export const useStore = create<State & Action>()(
           }
           if (el.wine) {
             wineCount += 1;
+          }
+          if (el.suggestion) {
+            suggestionCount += 1;
           }
         });
 
@@ -103,7 +113,11 @@ export const useStore = create<State & Action>()(
             cheese: v.cheese,
             suggestion: v.suggestion,
           })),
-          pie: { numOfCheese: cheeseCount, numOfWine: wineCount },
+          pie: {
+            numOfCheese: cheeseCount,
+            numOfWine: wineCount,
+            num0fSuggestion: suggestionCount,
+          },
         }));
       },
     }),

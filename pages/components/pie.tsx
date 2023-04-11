@@ -13,6 +13,7 @@ const Pie = (props: Props) => {
         data={[
           { title: "cheese", value: pie.numOfCheese, color: "#FDFD96" },
           { title: "wine", value: pie.numOfWine, color: "#FF6961" },
+          { title: "suggestion", value: pie.num0fSuggestion, color: "#85E3FF" },
         ]}
       />
     </div>
